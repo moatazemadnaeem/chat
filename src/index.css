@@ -1,5 +1,7 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --mainColor:#6C63FF;
+  --goldColor:#F9A826;
 }
 *{
   margin: 0;
@@ -7,6 +9,23 @@
   box-sizing: border-box;
 }
 body{
-  background-color: #6C63FF;
+  background-color: var(--mainColor);
   font-weight:bold;
+}
+.nomatch{
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nomatch_content{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.nomatch_link{
+  text-decoration: none;
+  color: var(--goldColor);
+  margin-top: 0.5rem;
 }

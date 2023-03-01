@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, message , Select} from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import {axiosInstance} from '../../../axiosConfig';
-import {SignUpComp} from './Signup.styles'
+import {SignInComp} from './Signin.styles'
 import mainImg from '../../../assets/images/main_img.svg'
-import { Link , useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-interface SignupFormValues {
-  username: string;
+interface SigninFormValues {
   email: string;
   password: string;
 }
 
-const Signup = () => {
+const Signin = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
-
-  const onFinish = async (values: SignupFormValues) => {
+  const onFinish = async (values: SigninFormValues) => {
     setLoading(true);
     try {
-      const response = await axiosInstance.post('/users/create_user', values);
+      const response = await axiosInstance.post('/users/signin', values);
       setLoading(false);
       console.log(response.data)
-      return navigate('/verify_user');
+      return message.success(response.data.msg);
     } catch (error:any) {
         setLoading(false);
         const {errors}=error.response.data
@@ -32,15 +29,9 @@ const Signup = () => {
   };
 
   return (
-    <SignUpComp>
+    <SignInComp>
     <Form className='form' onFinish={onFinish} layout='vertical'>
-      <Form.Item
-        label="Username"
-        name="name"
-        rules={[{ required: true, message: 'Please input your username!' }]}
-      >
-        <Input />
-      </Form.Item>
+   
       <Form.Item
         label="Email"
         name="email"
@@ -55,26 +46,20 @@ const Signup = () => {
       >
         <Input.Password />
       </Form.Item>
-      <Form.Item
-        label="Role"
-        name="role"
-        rules={[{ required: true, message: 'Please input your role!' }]}
-      >
-       <Select options={[{value:'developer',label:'Developer'},{value:'client',label:'Client'}]}/>
-      </Form.Item>
+  
       <Form.Item>
         <Button className='btn' type="primary" htmlType="submit" loading={loading}>
-          Signup
+          Signin
         </Button>
       </Form.Item>
-      <div className='signin'>
-      <span>Already have an account ?</span>
-      <Link className='signin_link' to='/signin'>SignIn</Link>
+      <div className='signup'>
+      <span>Do Not have an account ?</span>
+      <Link className='signup_link' to='/'>SignUp</Link>
       </div>
     </Form>
     <img src={mainImg} alt='main'/>
-    </SignUpComp>
+    </SignInComp>
   );
 };
 
-export default Signup;
+export default Signin;

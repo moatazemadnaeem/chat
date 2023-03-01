@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {goldColor} from '../../../utils/sharedStyles'
-export const SignUpComp=styled.div`
+export const SignInComp=styled.div`
  display: flex;
  align-items: center;
  justify-content: space-evenly;
@@ -21,7 +21,7 @@ export const SignUpComp=styled.div`
     border: 1px solid ${goldColor};
     color: white;
  }
- .signin{
+ .signup{
     display: flex;
     justify-content: center;
     span{
@@ -29,7 +29,7 @@ export const SignUpComp=styled.div`
         margin-right: 5px;
     }
  }
- .signin_link{
+ .signup_link{
     color: ${goldColor};
     font-weight: bold;
  }
