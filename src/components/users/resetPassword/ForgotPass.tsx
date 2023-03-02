@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, message } from 'antd';
 import {axiosInstance} from '../../../axiosConfig';
-import {SignInComp} from './Signin.styles'
+import {BaseResetComp} from './BaseReset.styles'
 import mainImg from '../../../assets/images/main_img.svg'
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 interface SigninFormValues {
   email: string;
-  password: string;
 }
 
-const Signin = () => {
+const Forgot = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const onFinish = async (values: SigninFormValues) => {
     setLoading(true);
     try {
-      const response = await axiosInstance.post('/users/signin', values);
+      const response = await axiosInstance.post('/users/forgot-pass', values);
       setLoading(false);
       console.log(response.data)
-      return message.success(response.data.msg);
+      return navigate('/send-otp');
     } catch (error:any) {
         setLoading(false);
         const {errors}=error.response.data
@@ -29,45 +30,29 @@ const Signin = () => {
   };
 
   return (
-    <SignInComp>
+    <BaseResetComp>
     <Form className='form' onFinish={onFinish} layout='vertical'>
    
       <Form.Item
         label="Email"
         name="email"
-        rules={[{ required: true, message: 'Please input your email!' }]}
+        rules={[{ required: true, message: 'Please input your email to reset!' }]}
       >
         <Input type="email"/>
       </Form.Item>
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
-      >
-        <Input.Password />
-      </Form.Item>
+     
   
       <Form.Item>
         <Button className='btn' type="primary" htmlType="submit" loading={loading}>
-          Signin
+          Next
         </Button>
       </Form.Item>
     
 
-      <div className='base_text'>
-      <span>Not Have An Account ?</span>
-      <Link className='base_text_link' to='/'>SignUp</Link>
-      </div>
-
-      <div className='base_text'>
-      <span>Forgot Your Password ?</span>
-      <Link className='base_text_link' to='/forgot-pass'>Forgot</Link>
-      </div>
-
     </Form>
     <img src={mainImg} alt='main'/>
-    </SignInComp>
+    </BaseResetComp>
   );
 };
 
-export default Signin;
+export default Forgot;

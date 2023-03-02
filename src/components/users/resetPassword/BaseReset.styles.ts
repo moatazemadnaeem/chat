@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import {goldColor} from '../../../utils/sharedStyles'
-export const SignInComp=styled.div`
+export const BaseResetComp=styled.div`
  display: flex;
  align-items: center;
  justify-content: space-evenly;
  height: 100vh;
  .form{
+    width: 300px;
     label{
         color: white;
     }
@@ -20,18 +21,6 @@ export const SignInComp=styled.div`
     background-color: ${goldColor};
     border: 1px solid ${goldColor};
     color: white;
- }
-
- .base_text{
-   display: flex;
-    span{
-        color: white;
-        margin-right: 5px;
-    }
- }
- .base_text_link{
-   color: ${goldColor};
-    font-weight: bold;
  }
 
  img{
