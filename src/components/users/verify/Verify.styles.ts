@@ -13,7 +13,7 @@ h2{
     width: 400px;
     line-height: 2rem;
 }
-.signin_link{
+.base_link{
     color: ${goldColor};
     font-weight: bold;
     text-decoration: none;

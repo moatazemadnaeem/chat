@@ -8,6 +8,7 @@ import Verify from './components/users/verify/Verify';
 import Forgot from './components/users/resetPassword/ForgotPass';
 import SendOtpReset from './components/users/resetPassword/SendOtpReset';
 import ResetPassword from './components/users/resetPassword/ResetPassword';
+import ResendOtp from './components/users/resendOtp/ResendOtp';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/forgot-pass"element={<Forgot/>} />
             <Route path="/send-otp"element={<SendOtpReset/>} />
             <Route path="/reset-pass"element={<ResetPassword/>} />
+            <Route path="/resend-otp"element={<ResendOtp/>} />
             <Route path="*" element={<NoMatch/>} />
           </Routes>
     </div>

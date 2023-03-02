@@ -12,6 +12,8 @@ interface SigninFormValues {
 
 const SendOtpReset = () => {
   const [loading, setLoading] = useState(false);
+  const [loadingResend, setLoadingResend] = useState(false);
+  const [email,setEmail]=useState('')
   const navigate = useNavigate();
 
   const onFinish = async (values: SigninFormValues) => {
@@ -28,6 +30,19 @@ const SendOtpReset = () => {
     }
    
   };
+  const handelOtpResend=async()=>{
+    setLoadingResend(true);
+    try {
+      const response = await axiosInstance.post('/users/resend-otp-reset', {email});
+      setLoadingResend(false);
+      console.log(response.data)
+      return message.success(response.data.msg);
+    } catch (error:any) {
+        setLoadingResend(false);
+        const {errors}=error.response.data
+        return message.error(errors[0].message);
+    }
+  };
 
   return (
     <BaseResetComp>
@@ -38,7 +53,7 @@ const SendOtpReset = () => {
         name="email"
         rules={[{ required: true, message: 'Please input your email to reset!' }]}
       >
-        <Input type="email"/>
+        <Input onChange={(e)=>setEmail(e.target.value)} type="email"/>
       </Form.Item>
       <Form.Item
         label="Otp"
@@ -47,7 +62,12 @@ const SendOtpReset = () => {
       >
         <Input />
       </Form.Item>
-  
+      <Form.Item>
+        <Button className='btn' type="primary" onClick={handelOtpResend} loading={loadingResend}>
+          Resend Otp
+        </Button>
+      </Form.Item>
+     
       <Form.Item>
         <Button className='btn' type="primary" htmlType="submit" loading={loading}>
           Next

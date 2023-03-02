@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import {goldColor} from '../../../utils/sharedStyles'
-export const BaseResetComp=styled.div`
+export const BaseResendComp=styled.div`
  display: flex;
  align-items: center;
  justify-content: space-evenly;
@@ -22,11 +22,7 @@ export const BaseResetComp=styled.div`
     border: 1px solid ${goldColor};
     color: white;
  }
- .resend{
-    color: ${goldColor};
-    cursor: pointer;
-    margin-bottom: 24px;
- }
+
  img{
     width: 300px;
  }
